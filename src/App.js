@@ -7,16 +7,22 @@ import DisplayTouristCard from "./components/DisplayTouristCard";
 import "./components/TouristInfoCard";
 import Footer from "./components/Footer";
 import Restaurant from "./components/Restaurant";
+import Nav from "./components/Nav";
 
 import AddCustomerForm from "./components/AddCustomerForm";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <div className="App">
-      <Header />
-      <DisplayTouristCard />
-      <Bookings />
-      <Restaurant />
+    <div>
+      <Router>
+        <Nav />
+        <Switch>
+          <Route path="/" exact component={DisplayTouristCard} />
+          <Route path="/bookings" component={Bookings} />
+          <Route path="/restaurants" component={Restaurant} />
+        </Switch>
+      </Router>
 
       <Footer
         footerData={[

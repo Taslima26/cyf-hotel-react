@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import Bookings from "./Bookings";
 import CustomerProfile from "./CustomerProfile";
 import TableRow from "./TableRow";
+
 function SearchResults({ results }) {
   const [customerId, setCustomerId] = useState(null);
   const sortedResults = [...results];
   const [sortedField, setSortedField] = useState(null);
+
   if (sortedField !== null) {
     sortedResults.sort((a, b) => {
       if (a[sortedField] < b[sortedField]) {
@@ -31,18 +33,18 @@ function SearchResults({ results }) {
             </th>
             <th scope="col">
               <button type="button" onClick={() => setSortedField("firstName")}>
-                firstName
+                Title
               </button>
             </th>
 
             <th scope="col">
               <button type="button" onClick={() => setSortedField("surname")}>
-                surname
+                Firstname
               </button>
             </th>
             <th scope="col">
               <button type="button" onClick={() => setSortedField("title")}>
-                Title
+                Surname
               </button>
             </th>
             <th scope="col">
