@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import SearchButton from "./SearchButton";
-import Bookings from "./Bookings";
+import "./Search.css";
 
 const Search = ({ search }) => {
   const [searchInput, setSearchInput] = useState("");
@@ -22,9 +22,9 @@ const Search = ({ search }) => {
   };
 
   return (
-    <div className="search">
-      <div className="page-header">
-        <h4 className="text-left">Search Bookings</h4>
+    <div className="form-group">
+      <div>
+        <h4>Search Bookings</h4>
       </div>
       <div className="row search-wrapper">
         <div className="col">

@@ -13,100 +13,117 @@ const AddCustomerForm = props => {
     checkOutDate: ""
   };
 
-  const [customer, setCustomer] = useState(initUser);
+  const [state, setState] = useState(initUser);
 
   const handleChange = event => {
     const updateCustomer = {
-      ...customer,
+      ...state,
       [event.target.name]: event.target.value
     };
-    setCustomer(updateCustomer);
+    setState(updateCustomer);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(customer.email);
-    if (
-      customer.email &&
-      customer.firstName &&
-      customer.surname &&
-      customer.title &&
-      customer.roomId &&
-      customer.checkInDate &&
-      customer.checkOutDate
-    ) {
-      handleChange(event, props.addCustomer(customer));
-    }
+    fetch(`https://taslima-hotel-server.glitch.me/bookings`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        firstName: state.firstName,
+        surname: state.surname,
+        email: state.email,
+        roomId: state.roomId,
+        checkInDate: state.checkInDate,
+        checkOutDate: state.checkOutDate,
+        title: state.title
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("success:", data);
+        //handleMessage();
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+    state.title = "";
+    state.firstName = "";
+    state.surname = "";
+    state.checkInDate = "";
+    state.checkOutDate = "";
+    state.roomId = "";
   };
 
   return (
     <form class="form-group">
       <div>
-        <label>Title</label>
+        <label className="form-row">Title</label>
         <input
-          className="u-full-width"
+          className="form-group"
           type="text"
-          value={customer.title}
+          value={state.title}
           name="title"
           onChange={handleChange}
         />
       </div>
       <div>
-        <label>First-Name</label>
+        <label className="form-row">First-Name</label>
         <input
           className="u-full-width"
           type="text"
-          value={customer.firstName}
+          value={state.firstName}
           name="firstName"
           onChange={handleChange}
         />
       </div>
       <div>
-        <label>surname</label>
+        <label className="form-row">surname</label>
         <input
           className="u-full-width"
           type="text"
-          value={customer.surname}
+          value={state.surname}
           name="surname"
           onChange={handleChange}
         />
       </div>
       <div>
-        <label>email</label>
+        <label className="form-row">email</label>
         <input
           className="u-full-width"
           type="text"
-          value={customer.email}
+          value={state.email}
           name="email"
           onChange={handleChange}
         />
       </div>
       <div>
-        <label>Room-id</label>
+        <label className="form-row">Room-id</label>
         <input
           className="u-full-width"
           type="number"
-          value={customer.roomId}
+          value={state.roomId}
           name="roomId"
           onChange={handleChange}
         />
       </div>
       <div>
-        <label>CheckIn</label>
+        <label className="form-row">CheckIn</label>
         <input
           className="u-full-width"
           type="date"
-          value={customer.checkInDate}
+          value={state.checkInDate}
           name="checkInDate"
           onChange={handleChange}
         />
       </div>
       <div>
-        <label>CheckOut</label>
+        <label className="form-row">CheckOut</label>
         <input
           className="u-full-width"
           type="date"
-          value={customer.checkOutDate}
+          value={state.checkOutDate}
           name="checkOutDate"
           onChange={handleChange}
         />

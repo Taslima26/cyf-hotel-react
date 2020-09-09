@@ -12,7 +12,7 @@ const Bookings = () => {
   console.log(loading);
   console.log(Booking);
   useEffect(() => {
-    fetch(`https://cyf-react.glitch.me/delayed`)
+    fetch(`https://taslima-hotel-server.glitch.me/bookings`)
       .then(res => res.json())
       .then(data => {
         if (data.error) {
